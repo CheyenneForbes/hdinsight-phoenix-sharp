@@ -18,6 +18,7 @@ namespace PhoenixSharp
     using Interfaces;
     using Requester;
     using System.Threading.Tasks;
+    using System;
     using Apache.Phoenix;
     using System.Net;
     using System.IO;
@@ -104,7 +105,13 @@ namespace PhoenixSharp
                 Name = Constants.WireMessagePrefix + "OpenConnectionRequest",
                 WrappedMessage = req.ToByteString()
             };
-
+            System.Diagnostics.Debug.WriteLine(req.ToByteString());
+            System.Diagnostics.Debug.WriteLine(".....");
+            System.Diagnostics.Debug.WriteLine(connectionId);
+            System.Diagnostics.Debug.WriteLine(".....");
+            System.Diagnostics.Debug.WriteLine(msg);
+            System.Diagnostics.Debug.WriteLine(".....");
+            System.Diagnostics.Debug.WriteLine(msg.ToByteArray());
             using (Response webResponse = await PostRequestAsync(msg.ToByteArray(), options))
             {
                 if (webResponse.WebResponse.StatusCode != HttpStatusCode.OK)
